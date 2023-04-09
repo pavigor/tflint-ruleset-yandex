@@ -16,10 +16,15 @@ resource "yandex_alb_load_balancer" "this" {
   zone_id   = "ru-central1-a"
 
   allocation_policy {
-//    zone_id   = "ru-central1-ass"
     location {
       zone_id   = "ru-central1-as"
       subnet_id = yandex_vpc_subnet.this.id
     }
+  }
+}
+
+resource "yandex_cm_certificate" "this" {
+  managed {
+    challenge_type = "DNS_CNAME"
   }
 }

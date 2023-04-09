@@ -55,7 +55,7 @@ func (r *YandexVpcSubnetInvalidZoneRule) Check(runner tflint.Runner) error {
 		err := runner.EvaluateExpr(attribute.Expr, &value, nil)
 
 		err = runner.EnsureNoError(err, func() error {
-			if !validAvailabilityZones[value] {
+			if !ValidAvailabilityZones[value] {
 				runner.EmitIssue(r, fmt.Sprintf("Invalid zone %s", value), attribute.Expr.Range())
 			}
 			return nil
