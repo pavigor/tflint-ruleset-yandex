@@ -1,4 +1,4 @@
-package rules
+package compute
 
 import "github.com/terraform-linters/tflint-plugin-sdk/tflint"
 

@@ -73,7 +73,7 @@ func (r *YandexAlbLoadBalancerInvalidZoneIdRule) Check(runner tflint.Runner) err
 				err := runner.EvaluateExpr(attribute.Expr, &zone_id, nil)
 
 				err = runner.EnsureNoError(err, func() error {
-					if !validAvailabilityZones[zone_id] {
+					if !ValidAvailabilityZones[zone_id] {
 						runner.EmitIssue(r, fmt.Sprintf("Invalid zone %s", zone_id), attribute.Expr.Range())
 					}
 					return nil

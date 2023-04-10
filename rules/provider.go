@@ -1,11 +1,17 @@
 package rules
 
-import "github.com/terraform-linters/tflint-plugin-sdk/tflint"
+import (
+	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
+	"github.com/terraform-linters/tflint-ruleset-template/rules/compute"
+)
 
 var manualRules = []tflint.Rule{
 	NewYandexAlbLoadBalancerInvalidZoneIdRule(),
-	NewComputeInstanceInvalidPlatformIdRule(),
+	compute.NewComputeInstanceInvalidPlatformIdRule(),
 	NewYandexVpcSubnetInvalidZoneRule(),
+	NewYandexCmCertificateInvalidChallengeTypeRule(),
+	compute.NewYandexComputeDiskInvalidTypeRule(),
+	compute.NewYandexComputeDiskInvalidZoneRule(),
 }
 
 var Rules []tflint.Rule
