@@ -1,4 +1,4 @@
-module github.com/terraform-linters/tflint-ruleset-template
+module github.com/pavigor/tflint-ruleset-yandex
 
 go 1.19
 
