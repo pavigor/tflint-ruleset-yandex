@@ -10,14 +10,14 @@ type YandexAlbLoadBalancerInvalidZoneIdRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
-	subAttr		  string
+	subAttr       string
 	attributeName string
 }
 
 func NewYandexAlbLoadBalancerInvalidZoneIdRule() *YandexAlbLoadBalancerInvalidZoneIdRule {
 	return &YandexAlbLoadBalancerInvalidZoneIdRule{
 		resourceType:  "yandex_alb_load_balancer",
-		subAttr: "allocation_policy",
+		subAttr:       "allocation_policy",
 		attributeName: "zone_id",
 	}
 }

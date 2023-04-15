@@ -1,43 +1,42 @@
-package compute
+package rules
 
 import (
 	"fmt"
 	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
-	"github.com/terraform-linters/tflint-ruleset-template/rules"
 )
 
-type ComputeInstancePlatformIdRule struct {
+type YandexComputeInstancePlatformIdRule struct {
 	tflint.DefaultRule
 
-	resourceType string
+	resourceType  string
 	attributeName string
 }
 
-func NewComputeInstanceInvalidPlatformIdRule() *ComputeInstancePlatformIdRule {
-	return &ComputeInstancePlatformIdRule{
-		resourceType: "yandex_compute_instance",
+func NewYandexComputeInstanceInvalidPlatformIdRule() *YandexComputeInstancePlatformIdRule {
+	return &YandexComputeInstancePlatformIdRule{
+		resourceType:  "yandex_compute_instance",
 		attributeName: "platform_id",
 	}
 }
 
-func (r *ComputeInstancePlatformIdRule) Name() string {
-	return "compute_instance_invalid_platform_type"
+func (r *YandexComputeInstancePlatformIdRule) Name() string {
+	return "yandex_compute_instance_invalid_platform_id"
 }
 
-func (r *ComputeInstancePlatformIdRule) Enabled() bool {
+func (r *YandexComputeInstancePlatformIdRule) Enabled() bool {
 	return true
 }
 
-func (r *ComputeInstancePlatformIdRule) Severity() tflint.Severity {
+func (r *YandexComputeInstancePlatformIdRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
-func (r *ComputeInstancePlatformIdRule) Link() string {
+func (r *YandexComputeInstancePlatformIdRule) Link() string {
 	return ""
 }
 
-func (r *ComputeInstancePlatformIdRule) Check(runner tflint.Runner) error {
+func (r *YandexComputeInstancePlatformIdRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{
 			{Name: r.attributeName},
@@ -56,7 +55,7 @@ func (r *ComputeInstancePlatformIdRule) Check(runner tflint.Runner) error {
 		err := runner.EvaluateExpr(attribute.Expr, &platformId, nil)
 
 		err = runner.EnsureNoError(err, func() error {
-			if !rules.ValidComputePlatforms[platformId] {
+			if !ValidComputePlatforms[platformId] {
 				runner.EmitIssue(r, fmt.Sprintf("\"%s\" is invalid platform id", platformId), attribute.Expr.Range())
 			}
 			return nil
