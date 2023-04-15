@@ -1,0 +1,3 @@
+plugin "template" {
+  enabled = true
+}
